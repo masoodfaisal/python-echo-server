@@ -13,11 +13,9 @@ class EchoRequestHandler(http.server.BaseHTTPRequestHandler):
         
     def do_POST(self):
         
-        request_headers = self.headers
-        content_length = request_headers.get('content-length')
-        length = int(content_length[0]) if content_length else 0
+        content_length = int(self.headers.get('Content-Length'))
         
-        print(self.rfile.read(length))
+        print(self.rfile.read(content_length))
         
         self.send_response(200)
     
